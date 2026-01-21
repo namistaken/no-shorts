@@ -5,41 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>No Shorts</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      width: 200px;
-      padding: 20px;
+      width: 280px;
+      padding: 12px;
       font-family: system-ui, sans-serif;
       text-align: center;
       margin: 0;
+      background: #1a1a1a;
+      color: #fff;
     }
     h1 {
-      font-size: 18px;
-      margin: 0 0 16px 0;
-      color: #cc0000;
+      font-size: 16px;
+      margin: 0 0 8px 0;
+      color: #ff4444;
     }
-    .stats {
-      background: #f5f5f5;
-      border-radius: 8px;
-      padding: 16px;
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #888;
     }
-    .count {
-      font-size: 32px;
+    .stats-row span {
+      background: #2a2a2a;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .game-container {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    #gameCanvas {
+      border: 2px solid #444;
+      border-radius: 4px;
+      background: #000;
+    }
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 70px;
+    }
+    .panel-box {
+      background: #2a2a2a;
+      border-radius: 4px;
+      padding: 6px;
+    }
+    .panel-box h3 {
+      font-size: 9px;
+      margin: 0 0 4px 0;
+      color: #888;
+      text-transform: uppercase;
+    }
+    .panel-box .value {
+      font-size: 14px;
       font-weight: bold;
-      color: #cc0000;
-      margin: 0;
+      color: #ff4444;
     }
-    .label {
-      font-size: 12px;
+    #nextCanvas {
+      background: #000;
+      border-radius: 2px;
+      margin: 4px auto 0;
+    }
+    .controls {
+      margin-top: 8px;
+      font-size: 9px;
       color: #666;
-      margin: 4px 0 0 0;
+    }
+    #startBtn {
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    #startBtn:hover {
+      background: #ff6666;
+    }
+    #gameOver {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.9);
+      padding: 16px;
+      border-radius: 8px;
+      border: 2px solid #ff4444;
+    }
+    .game-wrapper {
+      position: relative;
     }
   </style>
 </head>
 <body>
   <h1>No Shorts</h1>
-  <div class="stats">
-    <p class="count" id="blockedCount">0</p>
-    <p class="label">Shorts blocked</p>
+  <div class="stats-row">
+    <span>Shorts blocked: <strong id="blockedCount">0</strong></span>
+  </div>
+
+  <div class="game-wrapper">
+    <div class="game-container">
+      <canvas id="gameCanvas" width="150" height="300"></canvas>
+      <div class="side-panel">
+        <div class="panel-box">
+          <h3>Score</h3>
+          <div class="value" id="score">0</div>
+        </div>
+        <div class="panel-box">
+          <h3>Level</h3>
+          <div class="value" id="level">1</div>
+        </div>
+        <div class="panel-box">
+          <h3>Lines</h3>
+          <div class="value" id="lines">0</div>
+        </div>
+        <div class="panel-box">
+          <h3>Next</h3>
+          <canvas id="nextCanvas" width="60" height="60"></canvas>
+        </div>
+      </div>
+    </div>
+    <div id="gameOver">
+      <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">GAME OVER</div>
+      <button id="startBtn">Play Again</button>
+    </div>
+  </div>
+
+  <button id="startBtn2" style="margin-top: 8px; padding: 8px 16px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">Start Game</button>
+  <div class="controls">
+    ← → Move &nbsp;|&nbsp; ↑ Rotate &nbsp;|&nbsp; ↓ Drop
   </div>
   <script src="dist/popup.js"></script>
 </body>
