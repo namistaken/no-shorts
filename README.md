@@ -1,6 +1,12 @@
 # No Shorts
 
-A Chrome extension that removes YouTube Shorts from your feed.
+A Chrome extension that removes YouTube Shorts from your feed. Also includes a built-in Tetris game.
+
+## Features
+
+- Automatically removes YouTube Shorts from your feed
+- Tracks total Shorts blocked
+- Built-in Tetris game in the popup
 
 ## Installation
 
@@ -22,6 +28,15 @@ npm run watch      # Watch mode for development
 ## How it works
 
 The extension uses a content script that runs on YouTube pages. It detects Shorts-related elements (shelves, navigation links, etc.) and hides them from view. A MutationObserver ensures dynamically loaded content is also handled as you scroll.
+
+## Tetris
+
+Click the extension icon to open the popup and play Tetris!
+
+**Controls:**
+- ← → Move left/right
+- ↑ Rotate
+- ↓ Hard drop
 
 ## License
 
