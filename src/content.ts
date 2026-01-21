@@ -9,6 +9,15 @@ const SHORTS_SELECTORS = [
   'ytd-guide-entry-renderer a[title="Shorts"]',
 ];
 
+const updateBlockedCount = (count: number): void => {
+  chrome.storage.local.get(['blockedCount'], (result) => {
+    const currentCount = (result.blockedCount as number) || 0;
+    const newCount = currentCount + count;
+    chrome.storage.local.set({ blockedCount: newCount });
+    console.log(`No Shorts: Total blocked count: ${newCount}`);
+  });
+};
+
 const removeShortsElements = (): void => {
   let totalFound = 0;
 
@@ -25,6 +34,7 @@ const removeShortsElements = (): void => {
 
   if (totalFound > 0) {
     console.log(`No Shorts: Removed ${totalFound} Shorts elements`);
+    updateBlockedCount(totalFound);
   }
 };
 

@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const button = document.getElementById('actionButton');
-  const status = document.getElementById('status');
+  const countElement = document.getElementById('blockedCount');
 
-  button?.addEventListener('click', () => {
-    chrome.storage.local.set({ data: 'Hello from popup!' }, () => {
-      if (status) {
-        status.textContent = 'Data saved!';
-      }
-    });
+  chrome.storage.local.get(['blockedCount'], (result) => {
+    const count = (result.blockedCount as number) || 0;
+    if (countElement) {
+      countElement.textContent = count.toLocaleString();
+    }
   });
 });
